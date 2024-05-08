@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const authRoutes = require('./routes/auth');
+const profileRoutes = require('./routes/profile');
 const employeeRoutes = require('./routes/employee');
 const adminRoutes = require('./routes/admin');
 const { connectDB } = require('./config/db');
@@ -24,8 +25,7 @@ opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.JWT_SECRET;
 passport.use(new JwtStrategy(opts, async function (jwt_payload, done) {
     try {
-        console.log('app'+jwt_payload.sub)
-        const user = await User.findOne({ id: jwt_payload.sub });
+        const user = await User.findById(jwt_payload);
         if (user) {
             return done(null, user);
         } else {
@@ -47,6 +47,7 @@ app.get('/', (req, res) => {
 }); 
 
 app.use('/auth', authRoutes);
+app.use('/profile',passport.authenticate('jwt', { session: false }), profileRoutes);
 app.use('/admin/users',passport.authenticate('jwt', { session: false }), adminRoutes);
 app.use('/employee/',passport.authenticate('jwt', { session: false }), employeeRoutes);
 

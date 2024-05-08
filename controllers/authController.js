@@ -37,7 +37,7 @@ exports.login = async function (req, res) {
         const isMatch = await user.comparePassword(req.body.password);
         if (isMatch) {
             let token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, { expiresIn: '1h' });
-            res.json({ success: true, token: token });
+            res.json({ success: true, token: token});
         } else {
             res.status(401).send({ message: 'Authentication failed. Wrong password.' });
         }
