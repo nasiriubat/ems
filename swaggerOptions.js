@@ -108,7 +108,7 @@ const options = {
                     },
                 },
             },
-            '/users': {
+            '/employees': {
                 get: {
                     summary: 'Get a list of users',
                     description: 'Only admins can retrieve the list of users.',
@@ -154,7 +154,7 @@ const options = {
                     },
                 },
             },
-            '/users/{id}': {
+            '/employees/{id}': {
                 get: {
                     summary: 'Get a user by ID',
                     description: 'Logged in users can fetch only their own user information. Admins can fetch other users.',

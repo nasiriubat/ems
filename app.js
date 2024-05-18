@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', authRoutes);
-app.use('/users', passport.authenticate('jwt', { session: false }), userRoutes);
+app.use('/employees', passport.authenticate('jwt', { session: false }), userRoutes);
 app.use('*', (req, res) => {
     res.status(404).send({ message: 'Not found' });
 });

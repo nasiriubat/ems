@@ -28,16 +28,21 @@
 - **Required Dependencies**: The project uses Express, Passport, bcrypt, jwt, mongoose, and other necessary dependencies.
 - **Database**: The project uses a MongoDB database and connects to it using Mongoose.
 
-This project provides a robust solution for managing employee data with secure user authentication and role-based authorization. It's designed with scalability in mind, making it suitable for organizations of any size. Please refer to the API documentation for more details on how to use each endpoint. Enjoy using the project! 😊
+## API Documentation
+You can view the API documentation at http://localhost:3000/api-docs/#/
 
-## Endpoints
-- `POST /auth/register`: Register a new user.
-- `POST /auth/login`: Authenticate and receive a JWT.
-- `GET /employees`: Get a list of employees (Admins only, with pagination).
-- `GET /employees/:id`: View an employee’s data (Admin or self).
-- `POST /employees`: Add a new employee (Admins only).
-- `PUT /employees/:id`: Update employee data (Admin or self).
-- `DELETE /employees/:id`: Delete an employee (Admins only).
+## Used Packages
+The project uses the following npm packages:
+- bcrypt: ^5.1.1
+- body-parser: ^1.20.2
+- dotenv: ^16.4.5
+- express: ^4.19.2
+- jsonwebtoken: ^9.0.2
+- mongoose: ^8.3.4
+- passport: ^0.7.0
+- passport-jwt: ^4.0.1
+- swagger-jsdoc: ^6.2.8
+- swagger-ui-express: ^5.0.0
 
 To generate a new JWT secret, use the following command:
 ```bash

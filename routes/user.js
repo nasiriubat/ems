@@ -5,7 +5,7 @@ const { isAdmin, isEmployee, isSelfOrAdmin } = require('../middleware/roleMiddle
 
 /**
  * @swagger
- * /users:
+ * /employees:
  *   get:
  *     summary: Get a list of users
  *     description: Only admins can retrieve the list of users.
@@ -23,7 +23,7 @@ router.get('/', isAdmin, userController.getUsers);
 
 /**
  * @swagger
- * /users/{id}:
+ * /employees/{id}:
  *   get:
  *     summary: Get a user by ID
  *     description: Logged in users can fetch only their own user information. Admins can fetch other users.
@@ -46,7 +46,7 @@ router.get('/:id', isSelfOrAdmin, userController.getUser);
 
 /**
  * @swagger
- * /users:
+ * /employees:
  *   post:
  *     summary: Add a new user
  *     description: Only admins can add a new user.
@@ -67,7 +67,7 @@ router.post('/', isAdmin, userController.addUser);
 
 /**
  * @swagger
- * /users/{id}:
+ * /employees/{id}:
  *   put:
  *     summary: Update a user
  *     description: Logged in users can update only their own user information. Admins can update other users.
@@ -95,7 +95,7 @@ router.put('/:id', isSelfOrAdmin, userController.updateUser);
 
 /**
  * @swagger
- * /users/{id}:
+ * /employees/{id}:
  *   delete:
  *     summary: Delete a user
  *     description: Only admins can delete a user.
