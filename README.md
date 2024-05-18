@@ -28,6 +28,32 @@
 - **Required Dependencies**: The project uses Express, Passport, bcrypt, jwt, mongoose, and other necessary dependencies.
 - **Database**: The project uses a MongoDB database and connects to it using Mongoose.
 
+
+## Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/nasiriubat/ems
+   
+2. **Navigate to the project directory**:
+   ```bash
+   cd ems
+3. **Copy the example environment file**:
+   ```bash
+   cp .env.example .env
+
+4. **Update the environment variables**: 
+   Open the .env file and replace <db-url> and <jwt-secret> with your MongoDB connection string and JWT secret, respectively.
+5. **Install the dependencies**:
+   ```bash
+   npm install
+
+5. **Start the server**:
+   ```bash
+   npm run dev
+
+
+
 ## API Documentation
 You can view the API documentation at http://localhost:3000/api-docs/#/
 
