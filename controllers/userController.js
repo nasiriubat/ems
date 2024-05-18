@@ -1,9 +1,9 @@
 const User = require('../models/user');
 
 exports.getUsers = async function (req, res) {
-    if (req.user.role !== 1) {
-      return res.status(403).send({ message: 'Forbidden' });
-    }
+  if (req.user.role !== 1) {
+    return res.status(403).send({ message: 'Forbidden' });
+  }
 
   try {
     const users = await User.find({});
@@ -14,6 +14,9 @@ exports.getUsers = async function (req, res) {
 };
 
 exports.getUser = async function (req, res) {
+  console.log(req.user.role)
+  console.log(req.user.id)
+  console.log(req.params.id)
   if (req.user.role !== 1 && req.user.id !== req.params.id) {
     return res.status(403).send({ message: 'Forbidden' });
   }
@@ -26,7 +29,7 @@ exports.getUser = async function (req, res) {
     res.status(200).send(user);
   } catch (err) {
     // res.status(500).send({ message: 'Error fetching user.' });
-    res.status(500).send({ message: err.message});
+    res.status(500).send({ message: err.message });
   }
 };
 
@@ -41,7 +44,7 @@ exports.addUser = async function (req, res) {
     res.status(200).send({ message: 'User added!' });
   } catch (err) {
     // res.status(500).send({ message: 'Error adding user.' });
-    res.status(500).send({ message: err.message});
+    res.status(500).send({ message: err.message });
   }
 };
 
@@ -57,8 +60,16 @@ exports.updateUser = async function (req, res) {
     }
 
     Object.keys(req.body).forEach((key) => {
-      user[key] = req.body[key];
+      if (key == "role") {
+        if (req.user.role == 1) { // Assuming 1 is the role for admin
+          user[key] = req.body[key];
+        }
+      } else {
+        user[key] = req.body[key];
+      }
     });
+
+
 
     await user.save();
     res.status(200).send({ message: 'User updated!' });

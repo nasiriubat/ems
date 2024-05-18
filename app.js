@@ -5,9 +5,7 @@ const bodyParser = require('body-parser');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const authRoutes = require('./routes/auth');
-const profileRoutes = require('./routes/profile');
-const employeeRoutes = require('./routes/employee');
-const adminRoutes = require('./routes/admin');
+const userRoutes = require('./routes/user');
 const { connectDB } = require('./config/db');
 const User = require('./models/user')
 
@@ -47,8 +45,6 @@ app.get('/', (req, res) => {
 }); 
 
 app.use('/auth', authRoutes);
-app.use('/profile',passport.authenticate('jwt', { session: false }), profileRoutes);
-app.use('/admin/users',passport.authenticate('jwt', { session: false }), adminRoutes);
-app.use('/employee/',passport.authenticate('jwt', { session: false }), employeeRoutes);
+app.use('/users',passport.authenticate('jwt', { session: false }), userRoutes);
 
 app.listen(process.env.PORT || 3000, () => console.log('Server started on port 3000'));
