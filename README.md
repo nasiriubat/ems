@@ -33,16 +33,16 @@ You can view the API documentation at http://localhost:3000/api-docs/#/
 
 ## Used Packages
 The project uses the following npm packages:
-- bcrypt: ^5.1.1
-- body-parser: ^1.20.2
-- dotenv: ^16.4.5
-- express: ^4.19.2
-- jsonwebtoken: ^9.0.2
-- mongoose: ^8.3.4
-- passport: ^0.7.0
-- passport-jwt: ^4.0.1
-- swagger-jsdoc: ^6.2.8
-- swagger-ui-express: ^5.0.0
+- bcrypt
+- body-parser
+- dotenv
+- express
+- jsonwebtoken
+- mongoose
+- passport
+- passport-jwt
+- swagger-jsdoc
+- swagger-ui-express
 
 To generate a new JWT secret, use the following command:
 ```bash
