@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const projectController = require('../controllers/projectController');
 const taskController = require('../controllers/taskController');
-
+const attendanceController = require('../controllers/attendanceController');
+const backendSettingController = require('../controllers/backendSettingController')
 
 // project routes
 
@@ -21,6 +22,19 @@ router.get('/tasks/:id', taskController.getTaskById);
 router.put('/tasks/:id', taskController.updateTask);
 router.delete('/tasks/:id', taskController.deleteTask);
 router.post('/tasks/:id/comments', taskController.addComment);
+
+// attendence routes
+
+router.post('/attendance/checkin', attendanceController.checkIn);
+router.post('/attendance/checkout', attendanceController.checkOut);
+router.get('/attendance/late', attendanceController.getLateAttendances);
+router.get('/attendance/report/:userId', attendanceController.getAttendanceReport);
+router.put('/attendance/:id/status', attendanceController.updateAttendanceStatus);
+
+// backend-settings routes
+
+router.put('/settings', backendSettingController.updateSetting);
+router.get('/settings', backendSettingController.getSettings);
 
 
 

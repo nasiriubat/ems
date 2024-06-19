@@ -2,7 +2,7 @@ const Project = require('../models/project');
 const User = require('../models/user');
 const Task = require('../models/task');
 
-const createProject = async (req, res) => {
+exports.createProject = async (req, res) => {
   try {
     const { name, description, startDate, endDate, employees } = req.body;
 
@@ -22,7 +22,7 @@ const createProject = async (req, res) => {
 };
 
 
-const getAllProjects = async (req, res) => {
+exports.getAllProjects = async (req, res) => {
   try {
     const projects = await Project.find().populate('employees', 'name email');
     res.status(200).json(projects);
@@ -31,7 +31,7 @@ const getAllProjects = async (req, res) => {
   }
 };
 
-const getProjectById = async (req, res) => {
+exports.getProjectById = async (req, res) => {
   try {
     const project = await Project.findById(req.params.id)
       .populate('employees', 'name email')
@@ -53,7 +53,7 @@ const getProjectById = async (req, res) => {
   }
 };
 
-const updateProject = async (req, res) => {
+exports.updateProject = async (req, res) => {
   try {
     const { name, description, startDate, endDate, employees } = req.body;
 
@@ -73,7 +73,7 @@ const updateProject = async (req, res) => {
   }
 };
 
-const deleteProject = async (req, res) => {
+exports.deleteProject = async (req, res) => {
   try {
     const project = await Project.findByIdAndDelete(req.params.id);
 
@@ -90,7 +90,7 @@ const deleteProject = async (req, res) => {
   }
 };
 
-const addEmployeeToProject = async (req, res) => {
+exports.addEmployeeToProject = async (req, res) => {
   try {
     const { projectId, employeeId } = req.params;
 
@@ -117,7 +117,7 @@ const addEmployeeToProject = async (req, res) => {
 
 
 
-const removeEmployeeFromProject = async (req, res) => {
+exports.removeEmployeeFromProject = async (req, res) => {
   try {
     const { projectId, employeeId } = req.params;
 
@@ -137,7 +137,7 @@ const removeEmployeeFromProject = async (req, res) => {
   }
 };
 
-const getProjectEmployees = async (projectId) => {
+exports.getProjectEmployees = async (projectId) => {
   try {
     const project = await Project.findById(projectId).populate('employees', 'name email');
     return project.employees;
@@ -146,7 +146,7 @@ const getProjectEmployees = async (projectId) => {
     throw new Error('Error fetching project employees');
   }
 };
-const getProjectTasks = async (projectId) => {
+exports.getProjectTasks = async (projectId) => {
   try {
     const project = await Project.findById(projectId).populate({
       path: 'tasks',
@@ -162,16 +162,5 @@ const getProjectTasks = async (projectId) => {
   }
 };
 
-module.exports = {
-  createProject,
-  getAllProjects,
-  getProjectById,
-  updateProject,
-  deleteProject,
-  addEmployeeToProject,
-  removeEmployeeFromProject,
-  getProjectTasks,
-  getProjectEmployees
-};
 
 

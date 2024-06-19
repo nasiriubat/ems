@@ -1,8 +1,8 @@
 const Task = require('../models/task');
 const Project = require('../models/project');
-const User = require('../models/User');
+const User = require('../models/user');
 
-const createTask = async (req, res) => {
+exports.createTask = async (req, res) => {
     try {
       const { title, description, priority, assignedTo, project, dueDate } = req.body;
   
@@ -33,7 +33,7 @@ const createTask = async (req, res) => {
     }
   };
 
-  const getAllTasks = async (req, res) => {
+  exports.getAllTasks = async (req, res) => {
     try {
       const tasks = await Task.find().populate('assignedTo', 'name email').populate('project', 'name');
       res.status(200).json(tasks);
@@ -42,7 +42,7 @@ const createTask = async (req, res) => {
     }
   };
 
-  const getTaskById = async (req, res) => {
+  exports.getTaskById = async (req, res) => {
     try {
       const task = await Task.findById(req.params.id).populate('assignedTo', 'name email').populate('project', 'name');
       if (!task) {
@@ -54,7 +54,7 @@ const createTask = async (req, res) => {
     }
   };
 
-  const updateTask = async (req, res) => {
+  exports.updateTask = async (req, res) => {
     try {
       const { title, description, priority, status, assignedTo, dueDate } = req.body;
   
@@ -74,7 +74,7 @@ const createTask = async (req, res) => {
     }
   };
 
-  const deleteTask = async (req, res) => {
+  exports.deleteTask = async (req, res) => {
     try {
       const task = await Task.findByIdAndDelete(req.params.id);
       if (!task) {
@@ -90,7 +90,7 @@ const createTask = async (req, res) => {
     }
   };
 
-  const addComment = async (req, res) => {
+  exports.addComment = async (req, res) => {
     try {
       const { comment } = req.body;
       const userId = req.user._id; // Assuming user ID is available from authenticated user
@@ -109,13 +109,5 @@ const createTask = async (req, res) => {
     }
   };
 
-  module.exports = {
-    createTask,
-    getAllTasks,
-    getTaskById,
-    updateTask,
-    deleteTask,
-    addComment
-  };
   
 
