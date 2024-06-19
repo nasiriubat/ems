@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const Project = require('../models/project');
+const Task = require('../models/task');
 
 exports.getUsers = async function (req, res) {
   try {
@@ -67,3 +69,33 @@ exports.deleteUser = async function (req, res) {
     res.status(500).send({ message: err.message });
   }
 };
+
+exports.getAllEmployees = async function (req, res) {
+  try {
+    const employees = await User.find({ role: 2 }); // Adjust role value as needed
+    res.status(200).send(employees);
+  } catch (err) {
+    res.status(500).send({ message: 'Error fetching employees.' });
+  }
+};
+
+exports.getEmployeeProjects = async function (req, res) {
+  try {
+    const projects = await Project.find({ employees: req.params.id }).populate('employees', 'name email');
+    res.status(200).send(projects);
+  } catch (err) {
+    res.status(500).send({ message: 'Error fetching employee projects.' });
+  }
+};
+
+exports.getEmployeeTasks = async function (req, res) {
+  try {
+    const tasks = await Task.find({ assignedTo: req.params.id }).populate('assignedTo', 'name email').populate('project', 'name');
+    res.status(200).send(tasks);
+  } catch (err) {
+    res.status(500).send({ message: 'Error fetching employee tasks.' });
+  }
+};
+
+
+

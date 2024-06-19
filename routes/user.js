@@ -120,4 +120,8 @@ router.put('/:id', isSelfOrAdmin, userController.updateUser);
  */
 router.delete('/:id', isAdmin, userController.deleteUser);
 
+router.get('/employees', userController.getAllEmployees);
+router.get('/employees/:id/projects', userController.getEmployeeProjects);
+router.get('/employees/:id/tasks', userController.getEmployeeTasks);
+
 module.exports = router;
